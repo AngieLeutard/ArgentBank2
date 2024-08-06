@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+import {useState} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { editUserName } from '../redux/reducers/userReducer';
 
@@ -15,29 +15,20 @@ export default function App() {
     const [isActive, setIsActive] = useState(false);
     const [titleText, setTitleText] = useState('Welcome back');
     const [point, setPoint] = useState('!');
-    const [userName, setUserName] = useState('');
     const [firstName, setFirstName] = useState(userFirstName);
     const [lastName, setLastName] = useState(userLastName);
 
     const handleClick = () => {
         setIsActive(current => !current);
         setTitleText('Edit user name');
-        setFirstName('');
-        setLastName('');
         setPoint('');
     };
 
     const reverseClick = () => {
         setIsActive(current => !current);
         setTitleText('Welcome back');
-        setFirstName(userFirstName);
-        setLastName(userLastName);
         setPoint('!');
     };
-
-    useEffect(() => {
-        setUserName(initialUserName)
-    },[initialUserName])
 
   return (
     <div>
@@ -50,23 +41,22 @@ export default function App() {
             >
                 <div className="userName_input">
                     <label htmlFor="userName">User Name</label>
-                    <input type="text" id="userName" value={userName} onChange={(e) => setUserName(e.target.value)}/>
+                    <input type="text" id="userName" value={initialUserName} disabled/>
                 </div>
                 <div className="userName_input">
                     <label htmlFor="firstName">First Name</label>
-                    <input type="text" id="firstName" value={userFirstName} onChange={(e) => e.preventDefault()} disabled/>
+                    <input type="text" id="firstName"  onChange={(e) => setFirstName(e.target.value)} />
                 </div>
                 <div className="userName_input">
                     <label htmlFor="lastName">Last Name</label>
-                    <input type="text" id="LastName" value={userLastName} onChange={(e) => e.preventDefault()} disabled/>
+                    <input type="text" id="LastName"  onChange={(e) => setLastName(e.target.value)} />
                 </div>
                 <div className='userNameButton_wrapper'>
                     <button 
                         className="userName_button"
-                        disabled={!userName}
                         onClick={(e) => {
                             e.preventDefault()
-                            dispatch(editUserName({ userName:userName, token:token }))
+                            dispatch(editUserName({ lastName, firstName, token }))
                             dispatch(reverseClick)
                         }}
                     >

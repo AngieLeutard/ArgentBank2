@@ -41,7 +41,7 @@ export const userLogIn = createAsyncThunk(
 
 export const editUserName = createAsyncThunk(
     'user/editUserName',
-    async ({ userName, token }, thunkApi) => {
+    async ({ lastName, firstName, token }, thunkApi) => {
         try{
             const response = await fetch("http://localhost:3001/api/v1/user/profile", {
                 method: 'PUT',
@@ -49,10 +49,9 @@ export const editUserName = createAsyncThunk(
                     'Authorization' : `Bearer ${token}`,
                     'Content-Type': 'application/json;charset=utf-8'
                 },
-                body: JSON.stringify({ userName })
+                body: JSON.stringify({ lastName, firstName })
             }).then(res => {
                 if (res.ok) {
-                    console.log(userName)
                     return res.json()
                 }         
             })
@@ -99,7 +98,8 @@ const userSlice = createSlice ({
         })
         .addCase(editUserName.fulfilled, (state, action) => {
             let user = state.user
-            user.userName = action.payload.body.userName
+            user.firstName = action.payload.body.firstName
+            user.lastName = action.payload.body.lastName
             state.user = user
         })
     }
