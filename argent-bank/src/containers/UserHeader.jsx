@@ -9,7 +9,7 @@ import '../../src/index.css';
 export const UserHeader = () => {
 
     const dispatch = useDispatch()
-    const userName = useSelector(state => state.user.user.userName)
+    const userName = useSelector(state => state.user.user.firstName)
     console.log(userName)
     const navigate = useNavigate()
 

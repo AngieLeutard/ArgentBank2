@@ -40,10 +40,6 @@ export default function App() {
                 style={{display: isActive ? 'flex' : 'none',}}
             >
                 <div className="userName_input">
-                    <label htmlFor="userName">User Name</label>
-                    <input type="text" id="userName" value={initialUserName} disabled/>
-                </div>
-                <div className="userName_input">
                     <label htmlFor="firstName">First Name</label>
                     <input type="text" id="firstName"  onChange={(e) => setFirstName(e.target.value)} />
                 </div>
@@ -69,7 +65,7 @@ export default function App() {
                             dispatch(reverseClick)
                         }}
                     >
-                        Delete
+                        Cancel
                     </button>
                 </div>
             </ form>
