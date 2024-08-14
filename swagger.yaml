@@ -173,20 +173,16 @@ paths:
           description: Invalid Fields
         '500':
           description: Internal Server Error
-  /user/accounts/{accountId}/transactions/{transactionsId}:
     get:
+      security:
+          - Bearer: []
       tags:
       - User Module
       summary: Transaction details
       description: API for getting a single transaction details
       parameters:
       - in: path
-        name: accountId
-        description: User's account ID
-        type: integer
-        required: true
-      - in: path
-        name: transactionsId
+        name: transactionId
         description: Transaction's ID
         required: true
         type: integer
